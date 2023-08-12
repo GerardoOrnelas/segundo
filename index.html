@@ -1,0 +1,136 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Interfaz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .image-cell {
+            vertical-align: top;
+        }
+
+        input[type="checkbox"] {
+            margin-left: 5px;
+        }
+
+        .image-section {
+            clear: both;
+            margin-top: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tema</th>
+                    <th>Imagen</th>
+                    <th>Validado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Codificar</td>
+                    <td class="image-cell">
+                        <div class="image-section">
+                            <img src="imagen_codificar_1.jpg" alt="Imagen Codificar 1">
+                        </div>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="validado-codificar">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Diseñar</td>
+                    <td class="image-cell">
+                        <div class="image-section">
+                            <img src="imagen_disenar_1.jpg" alt="Imagen Diseñar 1">
+                        </div>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="validado-disenar">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Configurar RRSS</td>
+                    <td class="image-cell">
+                        <div class="image-section">
+                            <img src="imagen_configurar_1.jpg" alt="Imagen Configurar RRSS 1">
+                        </div>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="validado-configurar">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <button id="consultarBtn">Consultar</button>
+        <p id="mensaje"></p>
+    </div>
+
+    <script>
+        const consultarBtn = document.getElementById("consultarBtn");
+        const mensajeEl = document.getElementById("mensaje");
+
+        consultarBtn.addEventListener("click", function () {
+            const checkboxes = document.querySelectorAll("input[type='checkbox']");
+            let selectedTema = "";
+
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedTema = checkbox.parentElement.parentElement.firstElementChild.textContent;
+                    checkboxes.forEach((c) => c.checked = false);
+                    checkbox.checked = true;
+                }
+            });
+
+            const numImagenes = document.querySelectorAll(".image-section img").length;
+
+            if (selectedTema !== "") {
+                mensajeEl.textContent = `Tema elegido: ${selectedTema}, número de imágenes: ${numImagenes}`;
+            } else {
+                mensajeEl.textContent = "Por favor seleccione un tema.";
+            }
+        });
+    </script>
+</body>
+</html>
+
+</html>
+
